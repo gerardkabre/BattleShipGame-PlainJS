@@ -1,0 +1,68 @@
+<html>
+
+<head>
+    <title> Hundir la flota </title>
+
+    <!-- Files -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Battleship</h1>
+
+    <div class="wrapper">
+
+        <div class="player1Global">
+            <h2>Player
+                <span class="number">1</span>
+                turn
+            </h2>
+            <div class="player1own">
+                <p>Player 1: Select where you want your ships to be placed in the map.</p>
+                <div class="Player1ownBoard"></div>
+            </div>
+            <div class="player1target">
+                <p>Attack! Try to guess where your oponent ships are.</p>
+                <div class="Player1targetBoard"></div>
+            </div>
+        </div>
+
+        <div class="player2Global">
+            <h2>Player
+                <span class="number">2</span>
+                turn
+            </h2>
+            <div class="player2own">
+                <p>Player 2: Select where you want your ships to be placed in the map.</p>
+                <div class="Player2ownBoard"></div>
+            </div>
+            <div class="player2target">
+                <p>Attack! Try to guess where your oponent ships are.</p>
+                <div class="Player2targetBoard"></div>
+            </div>
+        </div>
+    </div>
+    <div class="results">
+        <div class="HIT noShow">
+            <h2>HIT!</h2>
+            
+        </div>
+        <div class="MISS noShow">
+            <h2>Miss</h2>
+        </div>
+        <div class="WIN noShow">
+            
+        </div>
+    </div>
+
+
+
+
+
+    <script src="Game.js"></script>
+    <script src="Boards.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
