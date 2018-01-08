@@ -2,63 +2,23 @@ class Game {
   constructor() {
     this.Player1Score = 0;
     this.Player2Score = 0;
-
     this.Player1Ships = [];
     this.Player2Ships = [];
-
-    this.currentPlayerTurn = 1;
-
-    this.selectElements();
-    
-    this.player2Global.classList.add("noShow");
+    this.currentPlayerTurn = 1;    
   }
-  selectElements() {
-    this.player1Global = document.querySelector(`.player1Global`);
-    this.player2Global = document.querySelector(`.player2Global`);
-    this.missElement = document.querySelector(`.MISS`);
-    this.hitElement = document.querySelector(`.HIT`);
-    this.winElement = document.querySelector(`.WIN`);
-  }
-  ownCellHandler(event) {
-    switch (this.currentPlayerTurn) {
-      case 1:
-        this.Player1Ships.push(parseInt(event.target.id));
-        event.target.classList.add("selected");
-        this.Player1Ships.length === 5 ? this.changeTurn(100) : null;
-        break;
-      case 2:
-        this.Player2Ships.push(parseInt(event.target.id));
-        event.target.classList.add("selected");
-        this.Player2Ships.length === 5 ? this.shipSelectingFinished() : null;
-        break;
-    }
-  }
-  targetCellHandler(event) {
-    switch (this.currentPlayerTurn) {
-      case 1:
-        this.checkIfHit(parseInt(event.target.id), this.Player2Ships)
-          ? this.hitShot(event, 1)
-          : this.missedShot(event);
-        break;
-      case 2:
-        this.checkIfHit(parseInt(event.target.id), this.Player1Ships)
-          ? this.hitShot(event, 2)
-          : this.missedShot(event);
-        break;
-    }
-  }
+  
   checkIfHit(id, enemyShips) {
     return enemyShips.includes(id);
   }
   hitShot(event, shooter) {
     event.target.classList.add("attackHit");
-    this.hitAndMissAnimation(this.hitElement);
+    this.hitAndMissAnimation(hitElement);
     this.scoreUpdate(shooter);
     this.checkIfWinner();
   }
   missedShot(event) {
     event.target.classList.add("attackMiss");
-    this.hitAndMissAnimation(this.missElement);
+    this.hitAndMissAnimation(missElement);
     this.changeTurn(450);
   }
   hitAndMissAnimation(element) {
@@ -77,8 +37,8 @@ class Game {
       ? (this.currentPlayerTurn = 2)
       : (this.currentPlayerTurn = 1);
     setTimeout(() => {
-      this.player2Global.classList.toggle("noShow");
-      this.player1Global.classList.toggle("noShow");
+      player2Global.classList.toggle("noShow");
+      player1Global.classList.toggle("noShow");
     }, timeout);
   }
   checkIfWinner() {
@@ -89,20 +49,20 @@ class Game {
   winner(player) {
     var button = `<button onClick="window.location.reload()">Play again</button>`;
     player === 1
-      ? (this.winElement.innerHTML = `<h2>Player 1 Wins!</h2> ${button}`)
-      : (this.winElement.innerHTML = `<h2>Player 2 Wins!</h2> ${button}`);
+      ? (winElement.innerHTML = `<h2>Player 1 Wins!</h2> ${button}`)
+      : (winElement.innerHTML = `<h2>Player 2 Wins!</h2> ${button}`);
 
-    this.winElement.classList.toggle("noShow");
-    this.player2Global.classList.add("noShow");
-    this.player1Global.classList.add("noShow");
+    winElement.classList.toggle("noShow");
+    player2Global.classList.add("noShow");
+    player1Global.classList.add("noShow");
   }
   shipSelectingFinished() {
-    player1.targetBoard.classList.remove("noShow");
-    player1.targetWrapper.classList.remove("noShow");
-    player2.targetBoard.classList.remove("noShow");
-    player2.targetWrapper.classList.remove("noShow");
-    player1.ownWrapper.classList.add("noShow");
-    player2.ownWrapper.classList.add("noShow");
+    targetBoard1.classList.remove("noShow");
+    targetWrapper1.classList.remove("noShow");
+    targetBoard2.classList.remove("noShow");
+    targetWrapper2.classList.remove("noShow");
+    ownWrapper1.classList.add("noShow");
+    ownWrapper2.classList.add("noShow");
     this.changeTurn(300);
   }
 }
