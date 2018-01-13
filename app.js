@@ -1,4 +1,4 @@
-const app = function() {
+
   let game = new Game();
   let player1 = new Boards(1);
   let player2 = new Boards(2);
@@ -52,10 +52,14 @@ const app = function() {
   function addEvents() {
     ownCells1.forEach(x => x.addEventListener("click", game.ownCellHandler));
     ownCells2.forEach(x => x.addEventListener("click", game.ownCellHandler));
-    targetCells1.forEach(x => x.addEventListener("click", game.targetCellHandler));
-    targetCells2.forEach(x => x.addEventListener("click", game.targetCellHandler));
+    targetCells1.forEach(x =>
+      x.addEventListener("click", game.targetCellHandler)
+    );
+    targetCells2.forEach(x =>
+      x.addEventListener("click", game.targetCellHandler)
+    );
   }
-
-};
+ 
+  init()
 
 
