@@ -4,9 +4,36 @@ class Game {
     this.Player2Score = 0;
     this.Player1Ships = [];
     this.Player2Ships = [];
-    this.currentPlayerTurn = 1;    
+    this.currentPlayerTurn = 1;
   }
-  
+  ownCellHandler(event) {
+    switch (game.currentPlayerTurn) {
+      case 1:
+        game.Player1Ships.push(parseInt(event.target.id));
+        event.target.classList.add("selected");
+        game.Player1Ships.length === 5 ? game.changeTurn(100) : null;
+        break;
+      case 2:
+        game.Player2Ships.push(parseInt(event.target.id));
+        event.target.classList.add("selected");
+        game.Player2Ships.length === 5 ? game.shipSelectingFinished() : null;
+        break;
+    }
+  }
+  targetCellHandler(event) {
+    switch (game.currentPlayerTurn) {
+      case 1:
+        game.checkIfHit(parseInt(event.target.id), game.Player2Ships)
+          ? game.hitShot(event, 1)
+          : game.missedShot(event);
+        break;
+      case 2:
+        game.checkIfHit(parseInt(event.target.id), game.Player1Ships)
+          ? game.hitShot(event, 2)
+          : game.missedShot(event);
+        break;
+    }
+  }
   checkIfHit(id, enemyShips) {
     return enemyShips.includes(id);
   }

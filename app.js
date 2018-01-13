@@ -50,39 +50,12 @@ const app = function() {
     targetCells2 = document.querySelectorAll(`.Player2targetBoard > .cell`);
   }
   function addEvents() {
-    ownCells1.forEach(x => x.addEventListener("click", ownCellHandler));
-    ownCells2.forEach(x => x.addEventListener("click", ownCellHandler));
-    targetCells1.forEach(x => x.addEventListener("click", targetCellHandler));
-    targetCells2.forEach(x => x.addEventListener("click", targetCellHandler));
+    ownCells1.forEach(x => x.addEventListener("click", game.ownCellHandler));
+    ownCells2.forEach(x => x.addEventListener("click", game.ownCellHandler));
+    targetCells1.forEach(x => x.addEventListener("click", game.targetCellHandler));
+    targetCells2.forEach(x => x.addEventListener("click", game.targetCellHandler));
   }
-  function ownCellHandler(event) {
-    switch (game.currentPlayerTurn) {
-      case 1:
-        game.Player1Ships.push(parseInt(event.target.id));
-        event.target.classList.add("selected");
-        game.Player1Ships.length === 5 ? game.changeTurn(100) : null;
-        break;
-      case 2:
-        game.Player2Ships.push(parseInt(event.target.id));
-        event.target.classList.add("selected");
-        game.Player2Ships.length === 5 ? game.shipSelectingFinished() : null;
-        break;
-    }
-  }
-  function targetCellHandler(event) {
-    switch (game.currentPlayerTurn) {
-      case 1:
-        game.checkIfHit(parseInt(event.target.id), game.Player2Ships)
-          ? game.hitShot(event, 1)
-          : game.missedShot(event);
-        break;
-      case 2:
-        game.checkIfHit(parseInt(event.target.id), game.Player1Ships)
-          ? game.hitShot(event, 2)
-          : game.missedShot(event);
-        break;
-    }
-  }
+
 };
 
 
